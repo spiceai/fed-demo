@@ -1,2 +1,5 @@
 # fed-demo
-Spice sample federated datasets
+
+```shell
+spice add spiceai/fed-demo
+```
