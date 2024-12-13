@@ -1,9 +1,27 @@
 version: v1beta1
 kind: Spicepod
 name: hn_launch_federated_demo
+
 datasets:
-- ref: datasets/pg_source
-- ref: datasets/s3_source
-- ref: datasets/s3_source_accelerated
-- ref: datasets/dremio_source
-- ref: datasets/dremio_source_accelerated
+  - from: dremio:datasets.taxi_trips
+    name: dremio_source
+    description: dremio taxi trips
+    params:
+      dremio_endpoint: grpc://20.163.171.8:32010
+
+  - from: dremio:datasets.taxi_trips
+    name: dremio_source_accelerated
+    description: dremio taxi trips
+    params:
+      dremio_endpoint: grpc://20.163.171.8:32010
+    acceleration:
+      enabled: true
+
+  - from: s3://spiceai-demo-datasets/cleaned_sales_data.parquet
+    name: s3_source
+
+  - from: s3://spiceai-demo-datasets/cleaned_sales_data.parquet
+    name: s3_source_accelerated
+    acceleration:
+      enabled: true
+      engine: sqlite
